@@ -1,22 +1,51 @@
 package mn7.spring.mn7_springboot.domain;
 
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
     private String password;
     private String fullName;
     private String address;
     private String phoneNumber;
+    private String avatar;
 
-    // public User(long id, String email, String password, String fullName, String
-    // address, String phoneNumber) {
-    // this.id = id;
-    // this.email = email;
-    // this.password = password;
-    // this.fullName = fullName;
-    // this.address = address;
-    // this.phoneNumber = phoneNumber;
-    // }
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Roles role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Orders> orders;
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
 
     public long getId() {
         return id;
@@ -66,10 +95,18 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
-                + ", address=" + address + ", phoneNumber=" + phoneNumber + "]";
+                + ", address=" + address + ", phoneNumber=" + phoneNumber + ", avatar=" + avatar + "]";
     }
 
 }
