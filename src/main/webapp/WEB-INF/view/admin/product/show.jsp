@@ -21,15 +21,57 @@
                 <jsp:include page="../layout/sidebar.jsp" />
                 <div id="layoutSidenav_content">
                     <main>
-                        <div class="container-fluid px-4">
-                            <h1 class="mt-4">Manage Products</h1>
+                        <div class="container-fluid px-7">
+                            <h1 class="mt-0">Manage Products</h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
+                                <li class="breadcrumb-item active"><a style="text-decoration: none;"
+                                        href="/admin">Dashboard</a>
+                                </li>
                                 <li class="breadcrumb-item active">Products</li>
                             </ol>
-                            <div>Order</div>
+                            <div class="container mt-0">
+                                <div class="row">
+                                    <div class="col-12 mx-auto">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h2 class="display mb-0">List Products</h2>
+                                            <a href="/admin/product/create" class="btn btn-primary btn-lg">Create
+                                                Product</a>
+                                        </div>
+                                        <hr />
 
-                        </div>
+                                        <table class="table table-bordered table-hover ">
+                                            <thead>
+                                                <tr class="table-secondary">
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Factory</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="product" items="${products}">
+                                                    <tr>
+                                                        <td>${product.id}</td>
+                                                        <td>${product.name}</td>
+                                                        <td>${product.price}</td>
+                                                        <td>${product.factory}</td>
+                                                        <td>
+                                                            <a href="/admin/product/${product.id}"
+                                                                class="btn btn-info btn-sm">View</a>
+                                                            <a href="/admin/product/update/${product.id}"
+                                                                class="btn btn-warning btn-sm">Update</a>
+                                                            <a href="/admin/product/delete/${product.id}"
+                                                                class="btn btn-danger btn-sm">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
                     </main>
                     <jsp:include page="../layout/footer.jsp" />
                 </div>
