@@ -1,5 +1,6 @@
 package mn7.spring.mn7_springboot.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,9 @@ public class Products {
 
     private String image;
 
-    @NotEmpty(message = "Detail description cannot be empty")
+    @NotNull
+    @NotEmpty(message = "detailDes không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDes;
 
     @NotEmpty(message = "Short description cannot be empty")

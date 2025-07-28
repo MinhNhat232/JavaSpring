@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import mn7.spring.mn7_springboot.domain.Roles;
 import mn7.spring.mn7_springboot.domain.User;
+import mn7.spring.mn7_springboot.domain.dto.RegisterDto;
 import mn7.spring.mn7_springboot.repository.RoleRepository;
 import mn7.spring.mn7_springboot.repository.UserRepository;
 
@@ -27,9 +28,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public List<User> getAllUsersByEmail(String email) {
-        return this.userRepository.findByEmail(email);
-    }
+    // public List<User> getAllUsersByEmail(String email) {
+    // return this.userRepository.findByEmail(email);
+    // }
 
     public User getUserByID(long id) {
         return userRepository.findById(id)
@@ -52,5 +53,18 @@ public class UserService {
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Role not found with name: " + name));
+    }
+
+    public User registerDTOtoUser(RegisterDto registerDto) {
+        User user = new User();
+        user.setFullName(registerDto.getFirstName() + " " + registerDto.getLastName());
+        user.setEmail(registerDto.getEmail());
+        user.setPassword(registerDto.getPassword());
+        return user;
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+
     }
 }
